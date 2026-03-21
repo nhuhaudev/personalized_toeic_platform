@@ -96,8 +96,3 @@ You will need to configure environment variables for each application in their r
 - `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`
 - `PAYOS_CLIENT_ID`, `PAYOS_API_KEY`, `PAYOS_CHECKSUM_KEY`
 
-## Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check [issues page](#).
-
-## License
-This project is licensed under the ISC License.
