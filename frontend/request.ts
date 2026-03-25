@@ -35,22 +35,16 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
-  const loadMessages = (loc: string) => {
+  const loadMessages = async (loc: string) => {
     try {
-      const filePath = path.join(
-        process.cwd(),
-        "src",
-        "messages",
-        `${loc}.json`
-      );
-      return JSON.parse(fs.readFileSync(filePath, "utf8"));
+      return (await import(`./src/messages/${loc}.json`)).default;
     } catch (error) {
       console.error(`Error loading messages for ${loc}:`, error);
       return {};
     }
   };
 
-  const baseMessages = loadMessages("en");
+  const baseMessages = await loadMessages("en");
 
   if (locale === "en") {
     return {
@@ -59,7 +53,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     };
   }
 
-  const localeMessages = loadMessages(locale);
+  const localeMessages = await loadMessages(locale);
   const mergedMessages = deepMerge(
     JSON.parse(JSON.stringify(baseMessages)) as MessagesObject,
     localeMessages
